@@ -17,6 +17,7 @@ const schema = buildSchema(`
 
   type Query {
     todos: [ToDo]!
+    todo(id: Int!): ToDo
   }
 
   type Mutation {
@@ -28,7 +29,10 @@ let todos = [];
 
 const root = {
   todos: () => todos,
-  createToDo: ({title, completed}) => {
+  todo: ({ id }) => {
+    return todos.find((todo) => id === todo.id);
+  },
+  createToDo: ({ title, completed }) => {
     // id creation not ideal, but something simple while not connected to DB
     const newToDo = {id: todos.length + 1, title, completed};
     todos = [...todos, newToDo];
