@@ -29,6 +29,7 @@ let todos = [];
 const root = {
   todos: () => todos,
   createToDo: ({title, completed}) => {
+    // id creation not ideal, but something simple while not connected to DB
     const newToDo = {id: todos.length + 1, title, completed};
     todos = [...todos, newToDo];
     return newToDo;
